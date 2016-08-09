@@ -1,5 +1,6 @@
 #ifndef PRODUCT_H
 #define PRODUCT_H
+
 #include<QString>
 
 class Product

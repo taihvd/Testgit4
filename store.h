@@ -1,16 +1,19 @@
 #ifndef STORE_H
 #define STORE_H
-#include "customer.h"
+
+#include "stock.h"
 #include "product.h"
+#include "customer.h"
+
 #include "QString"
 #include "QVector"
-#include "stock.h"
 #include "QPair"
 
 class Store
 {
 public:
     Store();
+
     bool importStock(Product np,int sl);
     int createOrder(Customer nc,Product np);
     QString getCustomersorder(QString fname);

@@ -15,8 +15,9 @@ int main()
     Customer newCustomer;
 
     int theChoose;
-    int newPrice,newCout,customerId;
+    int newPrice, newCout, customerId;
     int effectShow;
+
     string newName;
     string infoOrder;
     string cName;
@@ -35,50 +36,50 @@ int main()
 
         switch (theChoose) {
             case 1:
-                    cout << "Name:" ;
-                    cin >> newName;
-                    cout << "How much?:" ;
-                    cin >> newPrice;
-                    cout << "How many?:" ;
-                    cin >> newCout;
+                cout << "IMPORT STOCK" << endl;
+                cout << "Product name:" ;
+                cin >> newName;
 
-                    nnewName=QString::fromStdString(newName);
-                    newProduct.setName(nnewName);
-                    newProduct.setPrice(newPrice);
-                    superMarket.importStock(newProduct,newCout);
+                cout << "How much?:" ;
+                cin >> newPrice;
 
-                    cout << "OK!" << endl;
+                cout << "How many?:" ;
+                cin >> newCout;
+
+                nnewName=QString::fromStdString(newName);
+                newProduct.setName(nnewName);
+                newProduct.setPrice(newPrice);
+
+                superMarket.importStock(newProduct,newCout);
+
+                cout << "OK!" << endl << endl;
 
                 break;
             case 2:
-                try {
-                    cout << "Customer name:" ;
-                    cin >> cName;
-                    cout << "Customer id:" ;
-                    cin >> customerId;
-                    cqName=QString::fromStdString(cName);
-                    cout << "Product name:" ;
-                    cin >> newName;
-                    cout << "Number of items:";
-                    cin >> newCout;
+                cout << "Customer name:" ;
+                cin >> cName;
+                cout << "Customer id:" ;
+                cin >> customerId;
+                cqName=QString::fromStdString(cName);
+                cout << "Product name:" ;
+                cin >> newName;
+                cout << "Number of items:";
+                cin >> newCout;
 
-                    nnewName=QString::fromStdString(newName);
-                    newCustomer.setName(cqName);
-                    newCustomer.setId(customerId);
-                    newProduct.setName(nnewName);
-                    newStock.setItems(newProduct);
-                    newStock.setCout(newCout);
-                    effectShow=superMarket.createOrder(newCustomer,newProduct);
+                nnewName=QString::fromStdString(newName);
+                newCustomer.setName(cqName);
+                newCustomer.setId(customerId);
+                newProduct.setName(nnewName);
+                newStock.setItems(newProduct);
+                newStock.setCout(newCout);
+                effectShow=superMarket.createOrder(newCustomer,newProduct);
 
-                    if (effectShow == 101) {
-                        cout << "We don't have that product!" << endl;
-                    } else if (effectShow == 10) {
-                            cout << "Out of stuff!" << endl;
-                        }
-                    }
+                if (effectShow == 101) {
+                    cout << "We don't have that product!" << endl;
+                } else if (effectShow == 10) {
+                    cout << "Out of stuff!" << endl;
                 }
-                catch(exception) {
-                }
+
                 break;
             case 3:
                     cout << "Customer name:";
@@ -94,6 +95,7 @@ int main()
                     cout<<endl;
                 break;
         }
-    } while (theChoose!=4);
+    } while (theChoose != 4);
+
     return 0;
 }
