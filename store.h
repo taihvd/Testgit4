@@ -16,7 +16,7 @@ public:
 
     bool importStock(Product np,int sl);
     int createOrder(Customer nc,Product np);
-    QString getCustomersorder(QString fname);
+    QString getCustomersOrder(QString fname);
 
     QVector<Stock> getProductStocks() const;
     void setProductStocks(const QVector<Stock> &value);
