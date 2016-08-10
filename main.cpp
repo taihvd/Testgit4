@@ -104,7 +104,7 @@ int main()
                 if (infoOrder == "") {
                     cout << "Cannot find the customer!";
                 } else {
-                    cout << "Customer buy:" << endl << infoOrder;
+                    cout << "Customer buy: " << infoOrder << endl;
                 }
 
                 cout << endl;
