@@ -18,6 +18,7 @@ int main()
     int theChoose;
     int newPrice, newCout, customerId;
     int effectShow;
+    int static idNumber=0;
 
     string newName;
     string infoOrder;
@@ -32,7 +33,8 @@ int main()
         cout << "1.Import Stock" << endl;
         cout << "2.Create Order" << endl;
         cout << "3.List Customer" << endl;
-        cout << "4.Exit" << endl;
+        cout << "4.CheckOut the Store" << endl;
+        cout << "5.Exit" << endl;
 
         cout << "And you want(number):";
         cin >> theChoose;
@@ -65,9 +67,6 @@ int main()
                 cin >> cName;
                 cqName = QString::fromStdString(cName);
 
-                cout << "Customer id:" ;
-                cin >> customerId;
-
                 char askKey;
 
                 do
@@ -78,9 +77,11 @@ int main()
                     cout << "Number of items:";
                     cin >> newCout;
 
+                    idNumber++;
+
                     nnewName = QString::fromStdString(newName);
                     newCustomer.setName(cqName);
-                    newCustomer.setId(customerId);
+                    newCustomer.setId(idNumber);
 
                     newProduct.setName(nnewName);
 
@@ -113,13 +114,28 @@ int main()
                 if (infoOrder == "") {
                     cout << "Cannot find the customer!";
                 } else {
-                    cout << "Customer buy: \n" << infoOrder << endl;
+                    cout << "                     "<<cName<< "                               "<<endl;
+                    cout << "No.        Product         Numbers       Price       Totals  "<<endl;
+                    cout << infoOrder << endl;
                 }
 
                 cout << endl;
                 break;
+            case 4:
+                cout << "Customer name:";
+                cin >> cName;
+
+                infoOrder = "";
+                infoOrder = superMarket.getCustomersOrder(QString::fromStdString(cName)).toStdString();
+
+                if (infoOrder == "") {
+                    cout << "Cannot find the customer!";
+                } else {
+
+                }
+
         }
-    } while (theChoose != 4);
+    } while (theChoose != 5);
 
     return 0;
 }

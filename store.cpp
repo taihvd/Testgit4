@@ -69,13 +69,13 @@ QString Store::getCustomersOrder(QString fname)
     for (int i = 0; i < listCustomerOrderByName.count(); i++) {
         if (listCustomerOrderByName.at(i).first.getName() == fname) {
             placeTake++;
-            num = "Number:" + QString::number(placeTake) + " ";
-            t += num;
+            num = QString::number(placeTake) +" ";
+            t += num+"         ";
             t += listCustomerOrderByName.at(i).second.getItems().getName();
             num = QString::number(listCustomerOrderByName.at(i).second.getCout());
-            t += " " + num;
+            t += "             " + num+"            ";
             num = QString::number(listCustomerOrderByName.at(i).second.getItems().getPrice());
-            t += " " + num;
+            t += " " + num+"              ";
             num = QString::number(listCustomerOrderByName.at(i).second.getCout()*listCustomerOrderByName.at(i).second.getItems().getPrice());
             t += " " + num + "\n";
         }
