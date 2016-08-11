@@ -1,8 +1,8 @@
 #ifndef VIPCUSTOMER_H
 #define VIPCUSTOMER_H
+#include "customer.h"
 
-
-class VIPCustomer: public customer
+class VIPCustomer: public Customer
 {
 public:
     VIPCustomer();
