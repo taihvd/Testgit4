@@ -1,7 +1,6 @@
 #include <iostream>
 #include "string.h"
 #include <string>
-
 #include "customer.h"
 #include "product.h"
 #include "store.h"
@@ -69,29 +68,37 @@ int main()
                 cout << "Customer id:" ;
                 cin >> customerId;
 
-                cout << "Product name:" ;
-                cin >> newName;
+                char askKey;
 
-                cout << "Number of items:";
-                cin >> newCout;
+                do
+                {
+                    cout << "Product name:" ;
+                    cin >> newName;
 
-                nnewName = QString::fromStdString(newName);
-                newCustomer.setName(cqName);
-                newCustomer.setId(customerId);
+                    cout << "Number of items:";
+                    cin >> newCout;
 
-                newProduct.setName(nnewName);
+                    nnewName = QString::fromStdString(newName);
+                    newCustomer.setName(cqName);
+                    newCustomer.setId(customerId);
 
-                newStock.setItems(newProduct);
-                newStock.setCout(newCout);
+                    newProduct.setName(nnewName);
 
-                effectShow = superMarket.createOrder(newCustomer, newStock);
+                    newStock.setItems(newProduct);
+                    newStock.setCout(newCout);
 
-                if (effectShow == 101) {
-                    cout << "We don't have that product!" << endl;
-                } else if (effectShow == 10) {
-                    cout << "Out of stuff!" << endl;
-                }
+                    effectShow = superMarket.createOrder(newCustomer, newStock);
 
+                    if (effectShow == 101) {
+                        cout << "We don't have that product!" << endl;
+                    } else if (effectShow == 10) {
+                        cout << "Out of stuff!" << endl;
+                    }
+
+                    cout<<"Do u want buy something else?(Y/N): ";
+                    cin>>askKey;
+                 }
+                while (askKey!='N' || askKey!='n');
                 break;
 
             case 3:
