@@ -16,6 +16,7 @@ public:
 
     bool importStock(Product np,int sl);
     int createOrder(Customer nc,Stock np);
+    long long checkOut(Customer nc);
     QString getCustomersOrder(QString fname);
 
     QVector<Stock> getProductStocks() const;

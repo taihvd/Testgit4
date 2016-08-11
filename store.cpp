@@ -1,15 +1,26 @@
 #include "store.h"
-#include <QString>
+#include "QString"
 #include "customer.h"
 #include "product.h"
 #include "stock.h"
 #include "string.h"
 #include "QPair"
+
 Store::Store()
 {
 }
 
-
+long long Store::checkOut(Customer nc)
+{
+    long long sumAllCost = 0;
+    for (int i = 0 ; i < listCustomerOrderByName.count();i++)
+    {
+        if (listCustomerOrderByName.at(i).first.getName() == nc.getName()){
+            sumAllCost = listCustomerOrderByName.at(i).second.getCout() * listCustomerOrderByName.at(i).second.getItems().getPrice();
+        }
+    }
+    return sumAllCost;
+}
 int Store::createOrder(Customer nc, Stock np)
 {
     bool flag;
@@ -31,11 +42,11 @@ int Store::createOrder(Customer nc, Stock np)
     for (int i = 0; i < ProductStocks.count(); i++) {
         if (ProductStocks.at(i).getItems().getName() == np.getItems().getName()) {
             cp.second.getItems().setPrice(ProductStocks.at(i).getItems().getPrice());
-            if (ProductStocks.at(i).getCout() == 0) {
+            if (ProductStocks.at(i).getCout()-np.getCout() < 0) {
                 return 10;
             } else {
                 Stock x;
-                x.setCout(ProductStocks.at(i).getCout() - 1);
+                x.setCout(ProductStocks.at(i).getCout()-np.getCout());
                 x.setItems(ProductStocks.at(i).getItems());
                 ProductStocks.replace(i, x);
                 flag = true;
@@ -64,6 +75,8 @@ QString Store::getCustomersOrder(QString fname)
             num = QString::number(listCustomerOrderByName.at(i).second.getCout());
             t += " " + num;
             num = QString::number(listCustomerOrderByName.at(i).second.getItems().getPrice());
+            t += " " + num;
+            num = QString::number(listCustomerOrderByName.at(i).second.getCout()*listCustomerOrderByName.at(i).second.getItems().getPrice());
             t += " " + num + "\n";
         }
     }
