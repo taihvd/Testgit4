@@ -95,11 +95,12 @@ int main()
                         cout << "Out of stuff!" << endl;
                     }
 
-                    cout<<"Do u want buy something else?(Y/N): ";
-                    cin>>askKey;
+                    cout << "Do u want buy something else?(Y/N): ";
+                    cin >> askKey;
+                    if (askKey == 'N' || askKey == 'n') break;
                     //ne
                  }
-                while (askKey!='N' || askKey!='n');
+                while (theChoose == 2);
                 break;
 
             case 3:
