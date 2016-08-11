@@ -10,10 +10,10 @@ Store::Store()
 }
 
 
-int Store::createOrder(Customer nc, Product np)
+int Store::createOrder(Customer nc, Stock np)
 {
     bool flag;
-    QPair<Customer, Product> cp;
+    QPair<Customer, Stock> cp;
     cp.first = nc;
     cp.second = np;
     flag = false;
@@ -28,10 +28,9 @@ int Store::createOrder(Customer nc, Product np)
     }
 
     flag = false;
-
     for (int i = 0; i < ProductStocks.count(); i++) {
-        if (ProductStocks.at(i).getItems().getName() == np.getName()) {
-            cp.second.setPrice(ProductStocks.at(i).getItems().getPrice());
+        if (ProductStocks.at(i).getItems().getName() == np.getItems().getName()) {
+            cp.second.getItems().setPrice(ProductStocks.at(i).getItems().getPrice());
             if (ProductStocks.at(i).getCout() == 0) {
                 return 10;
             } else {
@@ -47,7 +46,6 @@ int Store::createOrder(Customer nc, Product np)
     if (flag == false) {
         return 101;
     }
-
     listCustomerOrderByName.push_back(cp);
     return 0;
 }
@@ -55,10 +53,18 @@ int Store::createOrder(Customer nc, Product np)
 QString Store::getCustomersOrder(QString fname)
 {
     QString t = "";
-
+    QString num;
+    int placeTake=0;
     for (int i = 0; i < listCustomerOrderByName.count(); i++) {
         if (listCustomerOrderByName.at(i).first.getName() == fname) {
-            t += listCustomerOrderByName.at(i).second.getName() + ":" + listCustomerOrderByName.at(i).second.getPrice()+ "\n";
+            placeTake++;
+            num = "Number:" + QString::number(placeTake) + " ";
+            t += num;
+            t += listCustomerOrderByName.at(i).second.getItems().getName();
+            num = QString::number(listCustomerOrderByName.at(i).second.getCout());
+            t += " " + num;
+            num = QString::number(listCustomerOrderByName.at(i).second.getItems().getPrice());
+            t += " " + num + "\n";
         }
     }
 
@@ -100,12 +106,12 @@ void Store::setCustomers(const QVector<Customer> &value)
 {
     Customers = value;
 }
-QVector<QPair<Customer, Product> > Store::getListCustomerOrderByName() const
+QVector<QPair<Customer, Stock> > Store::getListCustomerOrderByName() const
 {
     return listCustomerOrderByName;
 }
 
-void Store::setListCustomerOrderByName(const QVector<QPair<Customer, Product> > &value)
+void Store::setListCustomerOrderByName(const QVector<QPair<Customer, Stock> > &value)
 {
     listCustomerOrderByName = value;
 }

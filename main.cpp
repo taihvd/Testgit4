@@ -84,7 +84,7 @@ int main()
                 newStock.setItems(newProduct);
                 newStock.setCout(newCout);
 
-                effectShow = superMarket.createOrder(newCustomer, newProduct);
+                effectShow = superMarket.createOrder(newCustomer, newStock);
 
                 if (effectShow == 101) {
                     cout << "We don't have that product!" << endl;
@@ -104,7 +104,7 @@ int main()
                 if (infoOrder == "") {
                     cout << "Cannot find the customer!";
                 } else {
-                    cout << "Customer buy: " << infoOrder << endl;
+                    cout << "Customer buy: \n" << infoOrder << endl;
                 }
 
                 cout << endl;

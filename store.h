@@ -15,7 +15,7 @@ public:
     Store();
 
     bool importStock(Product np,int sl);
-    int createOrder(Customer nc,Product np);
+    int createOrder(Customer nc,Stock np);
     QString getCustomersOrder(QString fname);
 
     QVector<Stock> getProductStocks() const;
@@ -24,13 +24,13 @@ public:
     QVector<Customer> getCustomers() const;
     void setCustomers(const QVector<Customer> &value);
 
-    QVector<QPair<Customer, Product> > getListCustomerOrderByName() const;
-    void setListCustomerOrderByName(const QVector<QPair<Customer, Product> > &value);
+    QVector<QPair<Customer, Stock> > getListCustomerOrderByName() const;
+    void setListCustomerOrderByName(const QVector<QPair<Customer, Stock> > &value);
 
 private:
     QVector<Customer> Customers;
     QVector<Stock> ProductStocks;
-    QVector<QPair<Customer,Product> > listCustomerOrderByName;
+    QVector<QPair<Customer,Stock> > listCustomerOrderByName;
 };
 
 #endif // STORE_H
