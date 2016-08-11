@@ -97,6 +97,7 @@ int main()
 
                     cout<<"Do u want buy something else?(Y/N): ";
                     cin>>askKey;
+                    //ne
                  }
                 while (askKey!='N' || askKey!='n');
                 break;
