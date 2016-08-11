@@ -17,21 +17,21 @@ public:
     bool importStock(Product np,int sl);
     int createOrder(Customer nc,Stock np);
     long long checkOut(Customer nc);
+
     QString getCustomersOrder(QString fname);
 
     QVector<Stock> getProductStocks() const;
     void setProductStocks(const QVector<Stock> &value);
 
-    QVector<Customer> getCustomers() const;
-    void setCustomers(const QVector<Customer> &value);
+    QVector<Customer *> getCustomers() const;
+    void setCustomers(const QVector<Customer *> &value);
 
     QVector<QPair<Customer, Stock> > getListCustomerOrderByName() const;
     void setListCustomerOrderByName(const QVector<QPair<Customer, Stock> > &value);
 
 private:
-    QVector<Customer> Customers;
+    QVector<Customer *> Customers;
     QVector<Stock> ProductStocks;
     QVector<QPair<Customer,Stock> > listCustomerOrderByName;
 };
-
 #endif // STORE_H

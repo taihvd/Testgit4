@@ -5,18 +5,28 @@
 #include "stock.h"
 #include "string.h"
 #include "QPair"
-
+#include "vipcustomer.h"
 Store::Store()
 {
 }
 
-long long Store::checkOut(Customer nc)
+long long Store::checkOut(Customer newCustomer)
 {
     long long sumAllCost = 0;
-    for (int i = 0 ; i < listCustomerOrderByName.count();i++)
-    {
-        if (listCustomerOrderByName.at(i).first.getName() == nc.getName()){
+    Customer * middleCustomer;
+    //Caculate total price
+    for (int i = 0 ; i < listCustomerOrderByName.count();i++) {
+        if (listCustomerOrderByName.at(i).first.getName() == newCustomer.getName()){
             sumAllCost = listCustomerOrderByName.at(i).second.getCout() * listCustomerOrderByName.at(i).second.getItems().getPrice();
+        }
+    }
+    if (sumAllCost >= 100) {
+        for (int i = 0; i < Customers.count(); i++) {
+            if (Customers.at(i)->getName() == newCustomer.getName()){
+                middleCustomer = new VIPCustomer();
+                middleCustomer = &newCustomer;
+                Customers.replace(i,middleCustomer);
+            }
         }
     }
     return sumAllCost;
@@ -30,12 +40,12 @@ int Store::createOrder(Customer nc, Stock np)
     flag = false;
 
     for (int i = 0; i < Customers.count(); i++)
-        if (Customers.at(i).getName() == nc.getName()) {
+        if (Customers.at(i)->getName() == nc.getName()) {
             flag = true;
         }
 
     if (flag == false) {
-        Customers.push_back(nc);
+        Customers.push_back(&nc);
     }
 
     flag = false;
@@ -110,12 +120,12 @@ void Store::setProductStocks(const QVector<Stock> &value)
     ProductStocks = value;
 }
 
-QVector<Customer> Store::getCustomers() const
+QVector<Customer *> Store::getCustomers() const
 {
     return Customers;
 }
 
-void Store::setCustomers(const QVector<Customer> &value)
+void Store::setCustomers(const QVector<Customer *> &value)
 {
     Customers = value;
 }
