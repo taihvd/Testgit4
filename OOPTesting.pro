@@ -19,10 +19,12 @@ SOURCES += main.cpp \
     customer.cpp \
     product.cpp \
     store.cpp \
-    stock.cpp
+    stock.cpp \
+    vipcustomer.cpp
 
 HEADERS += \
     customer.h \
     product.h \
     store.h \
-    stock.h
+    stock.h \
+    vipcustomer.h

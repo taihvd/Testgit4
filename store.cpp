@@ -31,6 +31,7 @@ int Store::createOrder(Customer nc, Product np)
 
     for (int i = 0; i < ProductStocks.count(); i++) {
         if (ProductStocks.at(i).getItems().getName() == np.getName()) {
+            cp.second.setPrice(ProductStocks.at(i).getItems().getPrice());
             if (ProductStocks.at(i).getCout() == 0) {
                 return 10;
             } else {
@@ -57,7 +58,7 @@ QString Store::getCustomersOrder(QString fname)
 
     for (int i = 0; i < listCustomerOrderByName.count(); i++) {
         if (listCustomerOrderByName.at(i).first.getName() == fname) {
-            t += listCustomerOrderByName.at(i).second.getName() + "\n";
+            t += listCustomerOrderByName.at(i).second.getName() + ":" + listCustomerOrderByName.at(i).second.getPrice()+ "\n";
         }
     }
 
