@@ -13,24 +13,35 @@ Store::Store()
 long long Store::checkOut(Customer newCustomer)
 {
     long long sumAllCost = 0;
-    Customer * middleCustomer;
     //Caculate total price
     for (int i = 0 ; i < listCustomerOrderByName.count();i++) {
         if (listCustomerOrderByName.at(i).first.getName() == newCustomer.getName()){
-            sumAllCost = listCustomerOrderByName.at(i).second.getCout() * listCustomerOrderByName.at(i).second.getItems().getPrice();
+            sumAllCost += listCustomerOrderByName.at(i).second.getCout() * listCustomerOrderByName.at(i).second.getItems().getPrice();
         }
     }
+    //Change to Vip
     if (sumAllCost >= 100) {
         for (int i = 0; i < Customers.count(); i++) {
             if (Customers.at(i)->getName() == newCustomer.getName()){
-                middleCustomer = new VIPCustomer();
-                middleCustomer = &newCustomer;
-                Customers.replace(i,middleCustomer);
+                VipCustomers.push_back(changeToVip(newCustomer));
             }
         }
     }
+
     return sumAllCost;
 }
+
+long long Store::discountCaculate(long long totalPrice, QString customerName)
+{
+    long long t = totalPrice;
+    for (int i=0;i<VipCustomers.count();i++){
+        if (customerName == VipCustomers.at(i).getName())
+            t = (t * VipCustomers.at(i).getDiscount()) / 100;
+    }
+    if (t == totalPrice) return 0;
+    else return t;
+}
+
 int Store::createOrder(Customer nc, Stock np)
 {
     bool flag;
@@ -94,6 +105,15 @@ QString Store::getCustomersOrder(QString fname)
     return t;
 }
 
+VIPCustomer Store::changeToVip(Customer oldCustomer)
+{
+    VIPCustomer newVipCustomer;
+    newVipCustomer.setId(oldCustomer.getId());
+    newVipCustomer.setName(oldCustomer.getName());
+    newVipCustomer.setDiscount(10);
+    return newVipCustomer;
+}
+
 bool Store::importStock(Product np, int sl)
 {
     Stock x;
@@ -138,6 +158,16 @@ void Store::setListCustomerOrderByName(const QVector<QPair<Customer, Stock> > &v
 {
     listCustomerOrderByName = value;
 }
+QVector<VIPCustomer> Store::getVipCustomers() const
+{
+    return VipCustomers;
+}
+
+void Store::setVipCustomers(const QVector<VIPCustomer> &value)
+{
+    VipCustomers = value;
+}
+
 
 
 

@@ -16,8 +16,9 @@ int main()
     Customer newCustomer;
 
     int theChoose;
-    int newPrice, newCout, customerId;
+    int newPrice, newCout;
     int effectShow;
+    int totalPriceShow,totalDiscount;
     int static idNumber=0;
 
     string newName;
@@ -125,13 +126,17 @@ int main()
                 cout << "Customer name:";
                 cin >> cName;
 
-                infoOrder = "";
-                infoOrder = superMarket.getCustomersOrder(QString::fromStdString(cName)).toStdString();
+                newCustomer.setName(QString::fromStdString(cName));
 
-                if (infoOrder == "") {
-                    cout << "Cannot find the customer!";
+                totalPriceShow = superMarket.checkOut(newCustomer);
+
+                if (totalPriceShow == 0) {
+                    cout << "Cannot find the customer!" << endl;
                 } else {
-
+                    totalDiscount = superMarket.discountCaculate(totalPriceShow , QString::fromStdString(cName));
+                    cout << endl << "Discount: " << totalDiscount << endl;
+                    totalPriceShow -= totalDiscount;
+                    cout << endl << "Totals: " << totalPriceShow << endl;
                 }
 
         }
